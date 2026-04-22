@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>作品集 | テッココウィン</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- ナビゲーション -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">テッココウィン</a>
+            <ul class="nav-menu">
+                <li><a href="index.html">ホーム</a></li>
+                <li><a href="profile.html">プロフィール</a></li>
+                <li><a href="hobby.html">趣味</a></li>
+                <li><a href="work.html" class="active">作品集</a></li>
+                <li><a href="contact.html">連絡先</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 作品集ヘッダー -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">作品集</h1>
+            <p class="page-subtitle">私が作成したプロジェクトと作品</p>
+        </div>
+    </section>
+
+    <!-- 作品カテゴリ -->
+    <section class="works-categories">
+        <div class="container">
+            <div class="category-tabs">
+                <button class="category-tab active" data-category="all">すべて</button>
+                <button class="category-tab" data-category="web">ウェブ開発</button>
+                <button class="category-tab" data-category="game">ゲーム</button>
+                <button class="category-tab" data-category="design">デザイン</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 作品グリッド -->
+    <section class="works-grid-section">
+        <div class="container">
+            <div class="works-grid">
+                <!-- 作品1: クリックゲーム -->
+                <div class="work-item" data-category="game">
+                    <div class="work-image">
+                        <div class="image-placeholder medium">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <div class="work-overlay">
+                            <a href="game.html" class="work-link">プレイする</a>
+                        </div>
+                    </div>
+                    <div class="work-info">
+                        <h3>クリックカウンターゲーム</h3>
+                        <p class="work-category">ゲーム</p>
+                        <p class="work-description">シンプルで楽しいJavaScriptゲーム。30秒間で10回クリックできるかを競います。</p>
+                        <div class="work-tech">
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                        </div>
+                        <a href="game.html" class="btn btn-small">詳細を見る</a>
+                    </div>
+                </div>
+
+                <!-- 作品2: ポートフォリオサイト -->
+                <div class="work-item" data-category="web">
+                    <div class="work-image">
+                        <div class="image-placeholder medium">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <div class="work-overlay">
+                            <a href="index.html" class="work-link">閲覧する</a>
+                        </div>
+                    </div>
+                    <div class="work-info">
+                        <h3>ポートフォリオウェブサイト</h3>
+                        <p class="work-category">ウェブ開発</p>
+                        <p class="work-description">レスポンシブデザインのポートフォリオサイト。モダンなデザインとユーザーフレンドリーなインターフェース。</p>
+                        <div class="work-tech">
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                        </div>
+                        <a href="index.html" class="btn btn-small">詳細を見る</a>
+                    </div>
+                </div>
+
+                <!-- 作品3: フォトギャラリー -->
+                <div class="work-item" data-category="design">
+                    <div class="work-image">
+                        <div class="image-placeholder medium">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        <div class="work-overlay">
+                            <a href="hobby.html" class="work-link">閲覧する</a>
+                        </div>
+                    </div>
+                    <div class="work-info">
+                        <h3>インタラクティブフォトギャラリー</h3>
+                        <p class="work-category">デザイン</p>
+                        <p class="work-description">JavaScriptを使用したインタラクティブな写真ギャラリー。カテゴリフィルターとライトボックス機能。</p>
+                        <div class="work-tech">
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                        </div>
+                        <a href="hobby.html" class="btn btn-small">詳細を見る</a>
+                    </div>
+                </div>
+
+                <!-- 作品4: レスポンシブレイアウト -->
+                <div class="work-item" data-category="web">
+                    <div class="work-image">
+                        <div class="image-placeholder medium">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <div class="work-overlay">
+                            <a href="#" class="work-link">デモ</a>
+                        </div>
+                    </div>
+                    <div class="work-info">
+                        <h3>レスポンシブウェブレイアウト</h3>
+                        <p class="work-category">ウェブ開発</p>
+                        <p class="work-description">様々な画面サイズに対応したモダンなウェブレイアウト。FlexboxとGridを使用。</p>
+                        <div class="work-tech">
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">Flexbox</span>
+                        </div>
+                        <a href="#" class="btn btn-small">詳細を見る</a>
+                    </div>
+                </div>
+
+                <!-- 作品5: 計算機アプリ -->
+                <div class="work-item" data-category="web">
+                    <div class="work-image">
+                        <div class="image-placeholder medium">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <div class="work-overlay">
+                            <a href="calculator.html" class="work-link">使用する</a>
+                        </div>
+                    </div>
+                    <div class="work-info">
+                        <h3>JavaScript計算機</h3>
+                        <p class="work-category">ウェブ開発</p>
+                        <p class="work-description">四則演算ができるシンプルな計算機アプリケーション。クリーンなUIデザイン。</p>
+                        <div class="work-tech">
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                        </div>
+                        <a href="#" class="btn btn-small">詳細を見る</a>
+                    </div>
+                </div>
+
+                <!-- 作品6: 天気アプリ -->
+                <div class="work-item" data-category="web">
+                    <div class="work-image">
+                        <div class="image-placeholder medium">
+                            <i class="fas fa-cloud-sun"></i>
+                        </div>
+                        <div class="work-overlay">
+                            <a href="天気予報.html" class="work-link">デモ</a>
+                        </div>
+                    </div>
+                    <div class="work-info">
+                        <h3>シンプル天気アプリ</h3>
+                        <p class="work-category">ウェブ開発</p>
+                        <p class="work-description">APIを使用した天気情報表示アプリ。都市名を入力すると現在の天気を表示。</p>
+                        <div class="work-tech">
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">API</span>
+                        </div>
+                        <a href="天気予報.html" class="btn btn-small">詳細を見る</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <h3>テッココウィン</h3>
+                    <p>創造性と技術で価値を生み出すウェブ開発者</p>
+                </div>
+                <div class="footer-links">
+                    <h4>クイックリンク</h4>
+                    <ul>
+                        <li><a href="index.html">ホーム</a></li>
+                        <li><a href="profile.html">プロフィール</a></li>
+                        <li><a href="works.html">作品集</a></li>
+                        <li><a href="contact.html">連絡先</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>ソーシャルメディア</h4>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/share/186sCACgL1/?mibextid=wwXIfr"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/shiroi7887?igsh=MWJsb3Jid2o0OWQwNg%3D%3D&utm_source=qr"><i class="fab fa-instagram"></i></a>
+                        <a href="https://line.me/ti/p/Yo-i7UG_Fm"><i class="fa-brands fa-line"></i></a>
+                        <a href="https://github.com/htetkokowin-coder"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 テッココウィン. すべての権利を保有.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // 作品フィルター機能
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.category-tab');
+            const works = document.querySelectorAll('.work-item');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // アクティブタブを更新
+                    tabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const category = this.getAttribute('data-category');
+                    
+                    // 作品をフィルター
+                    works.forEach(work => {
+                        if (category === 'all' || work.getAttribute('data-category') === category) {
+                            work.style.display = 'block';
+                        } else {
+                            work.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

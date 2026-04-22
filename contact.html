@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>連絡先 | テッココウィン</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- ナビゲーション -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">テッココウィン</a>
+            <ul class="nav-menu">
+                <li><a href="index.html">ホーム</a></li>
+                <li><a href="profile.html">プロフィール</a></li>
+                <li><a href="hobby.html">趣味</a></li>
+                <li><a href="works.html">作品集</a></li>
+                <li><a href="contact.html" class="active">連絡先</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 連絡先ヘッダー -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">連絡先</h1>
+            <p class="page-subtitle">お気軽にお問い合わせください</p>
+        </div>
+    </section>
+
+    <!-- 連絡先コンテンツ -->
+    <section class="contact-content">
+        <div class="container">
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <h2>連絡先情報</h2>
+                    <p>ご質問、ご依頼、または単に挨拶をしたい場合でも、お気軽にご連絡ください。</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h3>メール</h3>
+                                <p>251025@yomiuririkou.ac.jp.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h3>所在地</h3>
+                                <p>ミャンマー、マンダレー市</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h3>電話</h3>
+                                <p>07012345678</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="social-contact">
+                        <h3>ソーシャルメディア</h3>
+                        <div class="social-icons-large">
+                            <a href="https://www.facebook.com/share/186sCACgL1/?mibextid=wwXIfr" class="social-link">
+                                <i class="fab fa-facebook-f"></i>
+                                <span>Facebook</span>
+                            </a>
+                            <a href="https://www.instagram.com/shiroi7887?igsh=MWJsb3Jid2o0OWQwNg%3D%3D&utm_source=qr" class="social-link">
+                                <i class="fab fa-instagram"></i>
+                                <span>Instagram</span>
+                            </a>
+                            <a href="https://www.tiktok.com/@htetkokowin96?_r=1&_t=ZS-93IX7RdCocL" class="social-link">
+                                <i class="fa-brands fa-tiktok"></i>
+                                <span>TikTok</span>
+                            </a>
+                            <a href="https://github.com/htetkokowin-coder" class="social-link">
+                                <i class="fab fa-github"></i>
+                                <span>GitHub</span>
+                            </a>
+                       
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h2>メッセージを送る</h2>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">お名前</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">メールアドレス</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">件名</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">メッセージ</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">メッセージを送信</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <h3>テッココウィン</h3>
+                    <p>創造性と技術で価値を生み出すウェブ開発者</p>
+                </div>
+                <div class="footer-links">
+                    <h4>クイックリンク</h4>
+                    <ul>
+                        <li><a href="index.html">ホーム</a></li>
+                        <li><a href="profile.html">プロフィール</a></li>
+                        <li><a href="works.html">作品集</a></li>
+                        <li><a href="contact.html">連絡先</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>ソーシャルメディア</h4>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/share/186sCACgL1/?mibextid=wwXIfr"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/shiroi7887?igsh=MWJsb3Jid2o0OWQwNg%3D%3D&utm_source=qr"><i class="fab fa-instagram"></i></a>
+                        <a href="https://line.me/ti/p/Yo-i7UG_Fm"><i class="fa-brands fa-line"></i></a>
+                        <a href="https://github.com/htetkokowin-coder"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 テッココウィン. すべての権利を保有.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="Js_main_javascript"></script>
+    <script>
+        // お問い合わせフォームの処理
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // フォームデータの取得
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            // 実際のアプリケーションではここでサーバーにデータを送信します
+            // デモ用にアラートを表示
+            alert(`ありがとうございます、${name}さん！\nメッセージが送信されました。\n（これはデモです。実際には送信されません。）`);
+            
+            // フォームをリセット
+            document.getElementById('contactForm').reset();
+        });
+    </script>
+</body>
+</html>

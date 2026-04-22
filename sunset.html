@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ランドスケープギャラリー - 3枚</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #121212;
+            color: #f0f0f0;
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 900px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #ff7b6a;
+            text-shadow: 0 3px 8px rgba(0, 0, 0, 0.6);
+            letter-spacing: 2px;
+        }
+        
+        .badge {
+            background-color: #b24a3a;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 40px;
+            display: inline-block;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        .slideshow-container {
+            width: 100%;
+            height: 550px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.9);
+            margin-bottom: 20px;
+            border: 4px solid #ff7b6a;
+        }
+        
+        .slides {
+            width: 300%;
+            height: 100%;
+            display: flex;
+            animation: slide-animation-3 24s infinite linear;
+        }
+        
+        .slide {
+            width: 33.3333333333%;
+            height: 100%;
+            position: relative;
+        }
+        
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+        
+        .slide-number {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #ff7b6a;
+            color: #121212;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.3rem;
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+            border: 2px solid white;
+        }
+        
+        .slide-title {
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 5px black;
+            background: rgba(0,0,0,0.4);
+            padding: 15px;
+            backdrop-filter: blur(5px);
+            font-family: 'Hiragino Sans', 'Helvetica', sans-serif;
+        }
+        
+        /* Animation for 3 landscape images - 8 seconds each */
+        @keyframes slide-animation-3 {
+            0%, 30% { transform: translateX(0); }           /* 1枚目: 8秒 */
+            33.33%, 63.33% { transform: translateX(-33.3333333333%); } /* 2枚目: 8秒 */
+            66.66%, 96.66% { transform: translateX(-66.6666666667%); } /* 3枚目: 8秒 */
+            100% { transform: translateX(-66.6666666667%); }
+        }
+        
+        .info-box {
+            background: linear-gradient(135deg, #2a1a1a, #1a1a1a);
+            padding: 25px;
+            border-radius: 20px;
+            margin-top: 25px;
+            border-right: 5px solid #ff7b6a;
+            font-size: 1.1rem;
+        }
+        
+        .info-grid {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .info-item {
+            background: rgba(255,123,106,0.1);
+            padding: 10px 20px;
+            border-radius: 40px;
+            border: 1px solid #ff7b6a;
+        }
+        
+        .highlight {
+            color: #ff7b6a;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .nav-dots {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .nav-dot {
+            width: 15px;
+            height: 15px;
+            background-color: #5a3a3a;
+            border-radius: 50%;
+            display: inline-block;
+            border: 2px solid #ff7b6a;
+        }
+        
+        /* Japanese text styling */
+        .japanese-text {
+            font-family: 'Hiragino Sans', 'Helvetica', sans-serif;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 700px) {
+            .slideshow-container {
+                height: 400px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .slide-title {
+                font-size: 1.5rem;
+                padding: 10px;
+            }
+        }
+        
+        @media (max-width: 500px) {
+            .slideshow-container {
+                height: 300px;
+            }
+            
+            h1 {
+                font-size: 1.6rem;
+            }
+            
+            .slide-title {
+                font-size: 1.2rem;
+                bottom: 15px;
+            }
+            
+            .slide-number {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏞️ ランドスケープギャラリー</h1>
+        <div class="badge">横長写真 3枚</div>
+        
+        <div class="slideshow-container">
+            <div class="slides">
+                <!-- Landscape Image 1 -->
+                <div class="slide">
+                    <img src=".\images\k2.jpg" alt="ランドスケープ 1" onerror="this.src='https://via.placeholder.com/900x550?text=美しい+山々'">
+                    <div class="slide-number">1</div>
+                    <div class="slide-title">おとなしい像たち</div>
+                </div>
+                
+                <!-- Landscape Image 2 -->
+                <div class="slide">
+                    <img src=".\images\k5.jpg" alt="ランドスケープ 2" onerror="this.src='https://via.placeholder.com/900x550?text=海辺の風景'">
+                    <div class="slide-number">2</div>
+                    <div class="slide-title">夕日</div>
+                </div>
+                
+                <!-- Landscape Image 3 -->
+                <div class="slide">
+                    <img src=".\images\k6.jpg" alt="ランドスケープ 3" onerror="this.src='https://via.placeholder.com/900x550?text=夕日'">
+                    <div class="slide-number">3</div>
+                    <div class="slide-title">夕日</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="nav-dots">
+            <span class="nav-dot"></span>
+            <span class="nav-dot"></span>
+            <span class="nav-dot"></span>
+        </div>
+        
+        <div class="info-box">
+            <p><span class="highlight">🎬 CSSアニメーション</span> で作った横長スライドショー</p>
+            
+            <div class="info-grid">
+                <div class="info-item">📸 写真 3枚</div>
+                <div class="info-item">⏱️ 各8秒</div>
+                <div class="info-item">🔄 合計24秒</div>
+                <div class="info-item">⚡ JavaScript不使用</div>
+            </div>
+            
+            <p style="margin-top: 15px; font-style: italic;" class="japanese-text">写真サイズ - 横長 (ランドスケープ)</p>
+        </div>
+    </div>
+</body>
+</html>

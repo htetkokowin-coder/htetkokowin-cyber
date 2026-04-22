@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>シンプル天気アプリ</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #89CFF0, #E0F7FA);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        
+        .description {
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .input-group {
+            display: flex;
+            margin-bottom: 30px;
+            gap: 10px;
+        }
+        
+        #city-input {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        #city-input:focus {
+            outline: none;
+            border-color: #4A90E2;
+        }
+        
+        #get-weather {
+            background: #4A90E2;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        #get-weather:hover {
+            background: #357ABD;
+        }
+        
+        .weather-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .weather-card.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .city-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .country {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        .temperature {
+            font-size: 60px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        
+        .description-text {
+            font-size: 18px;
+            margin-bottom: 15px;
+            text-transform: capitalize;
+        }
+        
+        .details {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .detail-item {
+            text-align: center;
+        }
+        
+        .detail-value {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        .detail-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .note {
+            margin-top: 20px;
+            color: #666;
+            font-size: 14px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌤️ シンプル天気アプリ</h1>
+        <p class="description">
+            世界中の都市の現在の天気情報を表示します。<br>
+            都市名を入力して「天気を取得」ボタンをクリックしてください。
+        </p>
+        
+        <div class="input-group">
+            <input 
+                type="text" 
+                id="city-input" 
+                placeholder="例: 東京, 大阪, ニューヨーク"
+            >
+            <button id="get-weather">天気を取得</button>
+        </div>
+        
+        <div id="weather-result" class="weather-card">
+            <div class="city-name" id="city-name">東京</div>
+            <div class="country" id="country">JP</div>
+            <div class="temperature" id="temperature">16°C</div>
+            <div class="description-text" id="weather-description">晴れ</div>
+            
+            <div class="details">
+                <div class="detail-item">
+                    <div class="detail-value" id="humidity">65%</div>
+                    <div class="detail-label">湿度</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-value" id="wind-speed">5.2 km/h</div>
+                    <div class="detail-label">風速</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-value" id="pressure">1013 hPa</div>
+                    <div class="detail-label">気圧</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="note">
+            💡 注: これはデモデータです。実際の天気情報を取得するには、OpenWeatherMapからAPIキーを取得する必要があります。
+        </div>
+    </div>
+
+    <script>
+        // デモデータ（様々な都市の天気データ）
+        const demoWeatherData = {
+            '東京': {
+                city: '東京',
+                country: 'JP',
+                temp: 16,
+                description: '晴れ',
+                humidity: 65,
+                windSpeed: 5.2,
+                pressure: 1013
+            },
+            '大阪': {
+                city: '大阪',
+                country: 'JP',
+                temp: 18,
+                description: '曇り',
+                humidity: 70,
+                windSpeed: 3.8,
+                pressure: 1012
+            },
+            '京都': {
+                city: '京都',
+                country: 'JP',
+                temp: 17,
+                description: '小雨',
+                humidity: 75,
+                windSpeed: 2.5,
+                pressure: 1011
+            },
+            '札幌': {
+                city: '札幌',
+                country: 'JP',
+                temp: 8,
+                description: '雪',
+                humidity: 85,
+                windSpeed: 6.7,
+                pressure: 1008
+            },
+            'ニューヨーク': {
+                city: 'New York',
+                country: 'US',
+                temp: 12,
+                description: '晴れ',
+                humidity: 60,
+                windSpeed: 8.3,
+                pressure: 1015
+            },
+            'ロンドン': {
+                city: 'London',
+                country: 'UK',
+                temp: 9,
+                description: '霧',
+                humidity: 80,
+                windSpeed: 4.1,
+                pressure: 1009
+            },
+            'パリ': {
+                city: 'Paris',
+                country: 'FR',
+                temp: 14,
+                description: '晴れ時々曇り',
+                humidity: 68,
+                windSpeed: 3.2,
+                pressure: 1014
+            },
+            'シドニー': {
+                city: 'Sydney',
+                country: 'AU',
+                temp: 22,
+                description: '快晴',
+                humidity: 55,
+                windSpeed: 7.5,
+                pressure: 1016
+            },
+            'ソウル': {
+                city: 'Seoul',
+                country: 'KR',
+                temp: 15,
+                description: '晴れ',
+                humidity: 62,
+                windSpeed: 4.8,
+                pressure: 1012
+            },
+            'シンガポール': {
+                city: 'Singapore',
+                country: 'SG',
+                temp: 28,
+                description: '雷雨',
+                humidity: 88,
+                windSpeed: 2.1,
+                pressure: 1009
+            }
+        };
+
+        // デフォルト都市（存在しない都市の場合に使用）
+        const defaultCity = '東京';
+
+        // ランダムな温度を生成する関数（±2度の変動）
+        function getRandomTemp(baseTemp) {
+            return baseTemp + (Math.random() * 4 - 2);
+        }
+
+        // 天気情報を表示する関数
+        function displayWeather(cityName) {
+            const weatherCard = document.getElementById('weather-result');
+            const cityData = demoWeatherData[cityName] || demoWeatherData[defaultCity];
+            
+            // 実際のデモデータがあればそれを使い、なければランダム生成
+            if (cityData) {
+                // 温度に少しランダム性を加える
+                const temp = getRandomTemp(cityData.temp);
+                
+                document.getElementById('city-name').textContent = cityData.city;
+                document.getElementById('country').textContent = cityData.country;
+                document.getElementById('temperature').textContent = `${temp.toFixed(1)}°C`;
+                document.getElementById('weather-description').textContent = cityData.description;
+                document.getElementById('humidity').textContent = `${cityData.humidity}%`;
+                document.getElementById('wind-speed').textContent = `${cityData.windSpeed} km/h`;
+                document.getElementById('pressure').textContent = `${cityData.pressure} hPa`;
+            } else {
+                // 完全にランダムなデータ
+                const randomTemp = Math.floor(Math.random() * 30) + 5;
+                const descriptions = ['晴れ', '曇り', '小雨', '雨', '雷雨', '雪'];
+                const randomDesc = descriptions[Math.floor(Math.random() * descriptions.length)];
+                
+                document.getElementById('city-name').textContent = cityName;
+                document.getElementById('country').textContent = '--';
+                document.getElementById('temperature').textContent = `${randomTemp}°C`;
+                document.getElementById('weather-description').textContent = randomDesc;
+                document.getElementById('humidity').textContent = `${Math.floor(Math.random() * 40) + 50}%`;
+                document.getElementById('wind-speed').textContent = `${(Math.random() * 10).toFixed(1)} km/h`;
+                document.getElementById('pressure').textContent = `${Math.floor(Math.random() * 20) + 1000} hPa`;
+            }
+            
+            // カードを表示
+            weatherCard.classList.add('active');
+        }
+
+        // 初期化
+        document.addEventListener('DOMContentLoaded', function() {
+            const getWeatherBtn = document.getElementById('get-weather');
+            const cityInput = document.getElementById('city-input');
+            
+            // 初期表示（東京）
+            displayWeather('東京');
+            
+            // ボタンクリックイベント
+            getWeatherBtn.addEventListener('click', function() {
+                const cityName = cityInput.value.trim();
+                if (cityName) {
+                    displayWeather(cityName);
+                } else {
+                    alert('都市名を入力してください！');
+                    cityInput.focus();
+                }
+            });
+            
+            // Enterキーでも検索できるように
+            cityInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    getWeatherBtn.click();
+                }
+            });
+            
+            // 入力フィールドにサンプル都市を表示（プレースホルダーとして）
+            const sampleCities = ['東京', '大阪', 'ニューヨーク', 'ロンドン', 'パリ'];
+            let currentIndex = 0;
+            
+            // オプション: サンプル都市名をローテーション表示（装飾用）
+            function rotatePlaceholder() {
+                cityInput.placeholder = `例: ${sampleCities[currentIndex]}`;
+                currentIndex = (currentIndex + 1) % sampleCities.length;
+            }
+            
+            // 3秒ごとにローテーション
+            setInterval(rotatePlaceholder, 3000);
+            rotatePlaceholder(); // 初期表示
+        });
+    </script>
+</body>
+</html>

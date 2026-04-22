@@ -1,0 +1,240 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+/**
+ * 学園祭の点心屋台管理システム
+ * 解決すべき問題:
+ * 1. 商品の余りすぎ
+ * 2. 時間帯による注文集中
+ * 3. スタッフ交替の問題
+ * 4. お釣り不足
+ */
+public class Main {
+    
+    // 商品アイテムのクラス
+    static class MenuItem {
+        String name;
+        int price;
+        int steamTime; // 調理時間（分）
+        int stock; // 在庫数
+        int initialStock; // 初期在庫
+        
+        public MenuItem(String name, int price, int steamTime, int stock) {
+            this.name = name;
+            this.price = price;
+            this.steamTime = steamTime;
+            this.stock = stock;
+            this.initialStock = stock;
+        }
+    }
+    
+    // メインデータ
+    static ArrayList<MenuItem> menu = new ArrayList<>();
+    static int cashRegister = 5000; // 初期レジ資金（円）
+    static int totalSales = 0;
+    static int cancelledOrders = 0;
+    static Scanner scanner = new Scanner(System.in);
+    
+    public static void main(String[] args) {
+        initializeMenu();
+        
+        while (true) {
+            System.out.println("\n===== 点心屋台 管理システム =====");
+            System.out.println("1. 新規メニュー登録");
+            System.out.println("2. 注文を受ける");
+            System.out.println("3. 在庫確認");
+            System.out.println("4. レジ確認");
+            System.out.println("5. 改善提案を見る");
+            System.out.println("6. レポート生成");
+            System.out.println("7. 終了");
+            System.out.print("選択 (1-7): ");
+            
+            int choice = scanner.nextInt();
+            
+            switch (choice) {
+                case 1:
+                    addMenuItem();
+                    break;
+                case 2:
+                    takeOrder();
+                    break;
+                case 3:
+                    displayStock();
+                    break;
+                case 4:
+                    displayCash();
+                    break;
+                case 5:
+                    showRecommendations();
+                    break;
+                case 6:
+                    generateReport();
+                    break;
+                case 7:
+                    System.out.println("システムを終了します。");
+                    scanner.close();
+                    return;
+                default:
+                    System.out.println("無効な選択です！");
+            }
+        }
+    }
+    
+    // 初期メニュー設定
+    static void initializeMenu() {
+        menu.add(new MenuItem("ごま団子", 30, 5, 50));
+        menu.add(new MenuItem("もも饅頭", 50, 10, 30));
+        menu.add(new MenuItem("シュウマイ", 50, 15, 40));
+        menu.add(new MenuItem("ちまき", 100, 20, 20));
+    }
+    
+    // 新規メニュー追加
+    static void addMenuItem() {
+        scanner.nextLine(); // バッファクリア
+        System.out.print("商品名: ");
+        String name = scanner.nextLine();
+        System.out.print("価格 (円): ");
+        int price = scanner.nextInt();
+        System.out.print("調理時間 (分): ");
+        int time = scanner.nextInt();
+        System.out.print("初期在庫数: ");
+        int stock = scanner.nextInt();
+        
+        menu.add(new MenuItem(name, price, time, stock));
+        System.out.println(name + " を追加しました。");
+    }
+    
+    // 注文処理
+    static void takeOrder() {
+        if (menu.isEmpty()) {
+            System.out.println("メニューが空です。");
+            return;
+        }
+        
+        System.out.println("\n--- メニュー ---");
+        for (int i = 0; i < menu.size(); i++) {
+            MenuItem item = menu.get(i);
+            System.out.println((i + 1) + ". " + item.name + " - " + item.price + "円 (" + item.stock + "個残)");
+        }
+        
+        System.out.print("商品番号 (1-" + menu.size() + ") を選択 (0でキャンセル): ");
+        int itemIndex = scanner.nextInt() - 1;
+        
+        if (itemIndex < 0 || itemIndex >= menu.size()) {
+            System.out.println("注文をキャンセルしました。");
+            return;
+        }
+        
+        MenuItem selected = menu.get(itemIndex);
+        
+        System.out.print("数量: ");
+        int quantity = scanner.nextInt();
+        
+        if (quantity > selected.stock) {
+            System.out.println("在庫不足です！ 残り: " + selected.stock + "個");
+            cancelledOrders++;
+            return;
+        }
+        
+        int total = selected.price * quantity;
+        System.out.println("合計金額: " + total + "円");
+        
+        System.out.print("支払金額 (円): ");
+        int payment = scanner.nextInt();
+        
+        if (payment < total) {
+            System.out.println("金額が不足しています！");
+            cancelledOrders++;
+            return;
+        }
+        
+        int change = payment - total;
+        
+        // お釣りチェック
+        if (change > cashRegister) {
+            System.out.println("お釣りが不足しています！ (レジ残高: " + cashRegister + "円)");
+            cancelledOrders++;
+            return;
+        }
+        
+        // 販売処理
+        selected.stock -= quantity;
+        totalSales += total;
+        cashRegister += total;
+        cashRegister -= change;
+        
+        System.out.println("調理中... (" + selected.steamTime * quantity + "分)");
+        System.out.println("お釣り: " + change + "円");
+        System.out.println("注文完了しました！");
+    }
+    
+    // 在庫表示
+    static void displayStock() {
+        System.out.println("\n--- 在庫状況 ---");
+        for (MenuItem item : menu) {
+            double percentage = (item.stock * 100.0) / item.initialStock;
+            System.out.printf("%s: %d個残 (%.1f%% 販売済)%n", 
+                item.name, item.stock, 100 - percentage);
+        }
+    }
+    
+    // レジ確認
+    static void displayCash() {
+        System.out.println("\n--- レジ状況 ---");
+        System.out.println("レジ残高: " + cashRegister + "円");
+        System.out.println("総売上: " + totalSales + "円");
+        
+        if (cashRegister < 1000) {
+            System.out.println("⚠️ 警告: お釣りが少なくなっています！");
+        }
+    }
+    
+    // 改善提案
+    static void showRecommendations() {
+        System.out.println("\n--- 来年度の改善提案 ---");
+        
+        // 問題1: 商品の余り
+        System.out.println("\n1. 商品余り問題:");
+        for (MenuItem item : menu) {
+            double soldPercentage = 100 - (item.stock * 100.0 / item.initialStock);
+            if (soldPercentage < 50) {
+                System.out.printf("   - %s: %.1f%%しか販売されませんでした。来年度は%d個ではなく%d個を準備しましょう。%n",
+                    item.name, soldPercentage, item.initialStock, item.initialStock / 2);
+            }
+        }
+        
+        // 問題4: お釣り不足
+        System.out.println("\n2. お釣り不足問題:");
+        System.out.println("   - 初期レジ資金を5000円から8000円に増やしましょう。");
+        System.out.println("   - レジ残高が1000円以下になったら警告を表示します。");
+        
+        System.out.println("\n3. 時間帯による注文集中問題:");
+        System.out.println("   - 混雑時間帯には調理器を2台使用しましょう。");
+        System.out.println("   - 人気商品を事前に調理しておきましょう。");
+    }
+    
+    // レポート生成
+    static void generateReport() {
+        System.out.println("\n========== 販売レポート ==========");
+        System.out.println("総売上: " + totalSales + "円");
+        System.out.println("キャンセル件数: " + cancelledOrders + "件");
+        System.out.println("最終レジ残高: " + cashRegister + "円");
+        
+        System.out.println("\n--- 商品別販売状況 ---");
+        for (MenuItem item : menu) {
+            int sold = item.initialStock - item.stock;
+            int revenue = sold * item.price;
+            System.out.printf("%s: %d個販売、%d円の売上%n", 
+                item.name, sold, revenue);
+        }
+        
+        // 来年度予測
+        System.out.println("\n--- 来年度の予測 ---");
+        for (MenuItem item : menu) {
+            int sold = item.initialStock - item.stock;
+            int recommendStock = (int)(sold * 1.1); // 10%増
+            System.out.printf("%s: 今年度%d個販売、来年度は%d個を準備しましょう。%n",
+                item.name, sold, recommendStock);
+        }
+    }
+}
